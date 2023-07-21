@@ -1,319 +1,170 @@
+
+
+
+
+
+
+
 @import "src/styles";
 
-.sidebarOption{
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
- .sidebarOption .material-icons{
-  padding: 20px;
- }
-
- .sidebarOption h2{
-  font-weight: 800;
-  font-size: 20px;
-  margin-right: 20px;
- }
- .sidebarOption:hover{
-  background-color: #e6ecf0;
-  border-radius: 30px;
-  color: #50b7f5;
-  transition: color 100ms ease-out;
- }
-  .box{
-    display: flex;
+.login-container{
+    background-color: #f5f0f1;
     height: 100vh;
-    max-width: 1500px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 10px;
-  }
-
-  .sidebar{
-    border-right: 1px solid #e6ecf0;
-    flex: 0.2;
-    min-width: 250px;
-    margin-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  /* feed */
-
-  .feed{
-    flex: 0.5;
-    border-right: 1px solid #e6ecf0;
-    min-width: fit-content;
-    overflow-y: scroll;
-  }
-
-  .feed__header{
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    border: 1px solid #e6ecf0;
-    padding: 15px 20px;
-  }
-
-  .feed__header h2{
-    font-size: 20px;
-    font-weight: 800;
-    margin-left: 20px;
-    margin-bottom: 10px;
-  }
-
-  .feed__header h3{
-
- 
-    margin-left: 55px;
-   
-  }
-  .feed__header mat-icon{
-    margin-right: 10px;
-  }
-
-  .feed::-webkit-scrollbar{
-    display: none;
-  }
-  .feed{
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* tweet box */
-  .tweetBox{
-    padding-bottom: 10px;
-    border-bottom: 8px solid #e6ecf0;
-    padding-right: 10px;
-  }
-  .tweetBox form{
+    width: 100vw;
+    position: relative;
     display: flex;
     flex-direction: column;
-  }
+}
 
-  .tweetBox__input{
+.login__header{
+    height: 70vh;
+    width: 100%;
     display: flex;
-    padding: 20px;
+    gap: 90px;
+    align-items: center;
+    justify-content: center;
+}
+    .login__header__left{
+        width: 580px;
+        padding-right: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+        img{
+            height: 300px;
+            margin-right: 400px;
+            margin-top: 100px;
+            width: 500px;
 
-  }
+        }
+        .h2{
+            font-size: 28px;
+            font-weight: normal;
+            line-height: 32px;
+            width: 500px;
+        } /* left ends here */
 
-  .tweetBox__input input{
-    flex: 1;
-    margin-left: 20px;
-    font-size: 20px;
-    border: none;
+
+
+        .login__header__right__card{
+            height: 470px;
+            width: 400px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        .login__header__right__card__content{
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .login-form{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+                input{
+                    padding:15px;
+                    outline: none;
+                    border: 1px solid lightgrey;
+                    border-radius: 5px;
+
+                }
+                    .placeholder{
+                        font-size: 16px;
+                        font-weight: normal;
+                    }
+                    .create-account{
+                        margin-bottom: 40px;
+                        margin-right: 20px;
+                    }
+                    .login-button{
+                        margin-left: 50px;
+                    }
+                    a{
+                        margin-left: 120px;
+                    }
+                   hr{
+                    border: 1px solid black;
+                   }
+
+
+                .login-button{
+                    background-color: blue;
+                    padding: 8px 120px;
+                    outline: none;
+                    border: none;
+                    border-radius: 7px;
+                    color:white;
+                    font-size: 18px;
+                    font-weight: bold;
+                  margin-top: 340px;
+                    cursor: pointer;
+                    margin-left: 40px;
+                    position: fixed;
+
+
+                }
+
+/*login form ends*/
+
+.a{
+    text-decoration:none ;
+    color: blue;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+  margin-top: 240px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    position: fixed;
+
+}
+
+.create-account{
+    background-color:green;
+    display: inline-block;
+    align-self: center;
     outline: none;
-  }
-  
-  .tweetBox__tweetButton{
-    background-color: #50b7f5;
     border: none;
+    border-radius: 7px;
+    padding: 10px 30px;
     color: white;
-    font-weight: 900;
-    border-radius: 30px;
-    width: 80px;
-    height: 40px;
-    margin-top: 20px;
-    margin-left: 200px;
-  }
-
-  /* post */
-
-
-  .post{
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid #50b7f5;
-    padding-bottom: 10px;
-  }
-
-  .post__body img{
-    width: 650px;
-    object-fit: contain;
-    border-radius: 20px;
-  }
-
-  .post__footer{
-    display: flex;
-    gap: 12px;
-    margin-left: 24px;
-   cursor: pointer;
-    /* justify-content: space-between; */
-  
-    margin-top: 10px;
-  }
-  .f1 {
-   margin-left: 32px;
-   cursor: pointer;
-  }
-  .post__badge{
-    font-size: 14px !important;
-    color: #50b7f5;
-    margin-right: 5px;
-  }
-
-  .post__headerSpecial{
-    font-weight: 600;
-    font-size: 13px;
-    color: gray;
-    margin-left: 27px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-
-  }
-  .post__headerText h3{
-   font-size: 20px;
-   margin-bottom: 5px;
-   margin-left: 25px;
-   cursor: pointer;
-
-  }
-  .post__headerDescription{
-    margin-top: 20px;
-    font-size: 15px;
+    margin-top: 400px;
     margin-left: 30px;
-    cursor: pointer;
+    position: fixed;
+
+}
+ /*card ends  here*/
+
+         .tagline{
+            text-align: center;
+            letter-spacing: 0.7px;
+
+        }
+
+   .login__fotter{
+     height: 30vh;
+    align-self: flex-end;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+
+.error-message {
+    color: red;
+    font-weight: bold;
   }
-  .post__body{
-    flex: 1;
-    padding: 10px;
+
+  .error-required {
+    font-weight: bold;
   }
-  .post__avatar{
-    padding: 10px;
-  }
-.b1{
-  display: flex;
-}
-
-.b4{
-  display: flex;
-}
-.b5{
-  margin-left: 40px;
-margin-bottom: 20px;
-
-}
-
-.b4 button{
-  border-radius: 15px;
-  height: 30px;
-  width: 80px;
-  color: white;
-  background-color: black;
-  margin-left: 40px;
-}
-.b3 h2{
-  margin-left: 20px;
- 
-}
-.widgets{
-  flex: 0.3;
-
-}
-.widgets__input{
-  display: flex;
-  align-items: center;
-  background-color: #e6ecf0;
-  padding: 10px;
-  border-radius: 20px;
-  margin-top: 10px;
-  margin-left: 20px;
-}
-.widgets__input input{
-  border: none;
-  background-color: #e6ecf0;
-  outline: none;
-}
-.widgets__searchIcon{
-  color: gray;
-}
-.widgets__widgetContainer{
-  margin-top: 15px;
-  margin-left: 20px;
-  padding: 5px;
-  background-color: #f5f8fa;
-  border-radius: 20px;
-}
-.b6 img{
-  height: 130px;
-  width: 160px;
-
-}
-
-.b7 img{
-  height: 130px;
-  width: 160px;
-
-}
-
-.search-hint-overlay {
-  position: relative;
-}
-
-.search-hint {
-  position: absolute;
-  top: calc(100% + 5px); 
-  left: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px; 
-  height: 80px; 
-  text-align: center;
-  overflow: auto;
-  margin-left: 50px;
-}
-.material-icons{
-  cursor: pointer;
-}
-
-.background-image {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
- 
-}
-
-
-
-.overlay-image {
-  position: absolute;
-  bottom: 10;
-  left: 0;
-  transform: translate(10%, 10%);
-  max-width: 20%; 
-  max-height: 20%; 
-  cursor: pointer;
-}
-
-.overlay-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; 
-  border-radius: 50%; 
-  cursor: pointer;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

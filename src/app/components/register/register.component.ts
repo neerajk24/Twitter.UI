@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
@@ -7,47 +8,78 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  searchQuery: string;
-  showSearchHint: boolean = false;
 
-  userProfilePhoto = 'assets/profile.jpg';
-  tweetMessage = '';
-  tweets: Tweet[] = [];
+ // constructor(){}
+ ngOnInit(): void {
 
+ }
 
 
-  toggleSearchHint(): void {
-    this.showSearchHint = !this.showSearchHint;
+registerForm: FormGroup;
+error:string = null;
+constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {
+  this.registerForm = this.formBuilder.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    confirmpassword: ['', Validators.required]
+  });
+}
+
+register(): void {
+  if (this.registerForm.invalid) {
+    // Perform actions if the form is invalid (e.g., display error messages)
+    return;
   }
- 
 
-  postTweet() {
-    if (this.tweetMessage) {
-      const newTweet: Tweet = {
-        username: 'Shweta Kale',
-        handle: 'shweta',
-        message: this.tweetMessage,
-        image: 'https://images.unsplash.com/your-image-url',
-        likes: 0,
-       comments: []
-      };
+  // Form is valid, proceed with the register process
+  const name = this.registerForm.value.name;
+  const email = this.registerForm.value.email;
+  const password = this.registerForm.value.password;
+  const confirmpassword = this.registerForm.value.confirmpassword;
 
-      this.tweets.unshift(newTweet);
-      this.tweetMessage = ''; 
+  if(password !== confirmpassword){
+    this.error = "Password not Match"
+    return
+  }
+
+  // Your API URL for the register endpoint
+  const apiUrl = 'https://localhost:44327/api/User/signup';
+
+  // Create the request body
+  const requestBody = {
+    name : name,
+    email: email,
+    password: password
+  };
+
+  // Set the headers (if required by your API)
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'accept': '*/*'
+  });
+
+  // Make the HTTP POST request
+  this.http.post(apiUrl, requestBody, { headers: headers }).subscribe(
+    (response: any) => {
+      console.log('register successful!', response);
+      this.router.navigate(['/']);
+    },
+    (error: any) => {
+      // Handle errors if the register fails
+      console.error('register failed!', error);
+      if(error.status == 200){
+        this.router.navigate(['/']);
+      }
+      // Perform any other error handling actions
     }
-  }
+  );
+}
 
-  likePost(tweet: any) {
-    
-    tweet.likes++;
-  }
+openLogin(): void {
+  this.router.navigate(['/']);
+}
 
-  promptComment(tweet: any) {
-    const comment = prompt('Enter your comment:');
-    if (comment) {
-      tweet.comments.push(comment);
-    }
-  }
 }
 
 interface Tweet {
@@ -55,9 +87,8 @@ interface Tweet {
   handle: string;
   message: string;
   image: string;
-  likes: number; 
+  likes: number;
   comments: string[];
 }
-
 
 

@@ -1,188 +1,54 @@
-
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!-- sidebar starts -->
-<div class="box">
-<div class="sidebar">
-  <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/twitter.png" alt="logo" mat-card-avatar></b></h1>
-  <div class="sidebarOption active">
-    <span class="material-icons">home</span>
-    <h2>Home</h2>
-   </div>
-
-   <div class="sidebarOption">
-    <span class="material-icons">search</span>
-    <h2>Explore</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">notifications_none</span>
-    <h2>Notifications</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">mail_outline</span>
-    <h2>Messages</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">bookmark_border</span>
-    <h2>Bookmarks</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">list_alt</span>
-    <h2>Lists</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">perm_identity</span>
-    <h2>Profile</h2>
-   </div>
-
-   <div class="sidebarOption active">
-    <span class="material-icons">more_horiz</span>
-    <h2>More</h2>
-   </div>
-
-   <img src="assets/profile.jpg" alt="avatar" [matMenuTriggerFor]="menu" mat-card-avatar>
-   <span class="name"><b>Shweta Kale</b></span>
-   <mat-menu #menu="matMenu">
-     <button mat-menu-item routerLink="">
-       <mat-icon>exit_to_app</mat-icon> Logout
-     </button>
-   </mat-menu>
+<div class="login-container">
+  <header class="login__header">
+<div class="login__header__left">
+<img src="assets/twitter-logo.png" alt="logo">
+<h2>Twitter helps you connect and share your  <br>
+  thoughts with the people in your life.</h2>
 </div>
 
-<!-- sidebar ends -->
-
-
-<!-- feed starts -->
-<div class="feed">
-  <div class="feed__header">
-     <h2><mat-icon routerLink="/home">keyboard_backspace</mat-icon><b>Shweta Kale</b></h2>
-
-     <h3> 100 Tweets</h3>
-    
-     
- </div>
-
-
-
-<!-- post starts -->
-<div class="b1">
-<div class="post__body">
-  <div class="post__header">
-    <div class="post__headerText">
-        <div class="background-image">
-            <img src="assets/background.jpg" alt="Background Image">
-            <div class="overlay-image">
-                <img src="assets/profile.jpg" alt="avatar" mat-card-avatar />
-            </div>
-          </div>
-     <br><br> <h3><b>Shweta Kale   </b> </h3>
-        <span class="post__headerSpecial">
-          <span class="material-icons post__badge"></span>@SHWETA003
-        </span>
-     
-   
-    </div>
-    <div class="post__headerDescription">
-      <p>| Computer Engineer
-        <br>| Build, create, design, and have it fail. Learn, read, fix, and start over. Such is the engineer’s way.
-        
-      </p>
-      
-    </div>
-  </div>
-
-  <div class="post__footer">
-   
-    <span class="material-icons">location_on </span>
-    <p> Satara,India</p>
-    <span class="material-icons"> location_city </span>
-    <p>Born Feb 17, 2001</p>
-    <span class="material-icons">today</span>
-   <p>Joined May 2023</p>
-   </div>
-   <div class="f1">
-   <br> <p><b>217 </b>Following &nbsp;&nbsp; <b> 75 </b>Followers</p>
-   </div>
-</div>
-</div>
-
-
-
-</div> 
-<!-- post ends -->
-
-
-<!-- widgets starts -->
-
-
-<div class="widgets">
-  <div class="widgets__input">
-    <span class="material-icons widgets__searchIcon">search</span>
-    <!-- <input type="text" placeholder="Search Twitter"> -->
-   
-   <input type="text" placeholder="Search Twitter" (click)="showSearchHint = true" (blur)="showSearchHint = false" [(ngModel)]="searchQuery">
-   
-  </div>
-  <div class="search-hint-overlay" *ngIf="showSearchHint && !searchQuery">
-    <div class="search-hint">
-      Try searching for people, topics, or keywords
-    </div>
-  </div>
-  <div class="widgets__widgetContainer">
-    <br><br><div class="b3">
-      <h2><b>You might like</b></h2><br>
-      <div class="b4">
-     &nbsp; <img src="https://play-lh.googleusercontent.com/ho8Huydq3byTb1adyGBdygTdisanbsjhAZ9GvZnJnCyXZ_e97eZOFWWuI10yeTKKWlXN=s94-rw" alt="avatar" mat-card-avatar />
-      <a href="https://twitter.com/NatGeo" style="color: black;"><h3> <b> &nbsp;National Geographic</b></h3></a>
-      <span class="material-icons post__badge">verified</span>
-      <a href="https://twitter.com/NatGeo" style="color: black;"><button><b>Follow</b></button></a>
-      
-    </div>
-    <div class="b5">
-      <p><a href="https://twitter.com/NatGeo" style="color: black;">@NatGeo</a></p>
-    </div>
-
-    <div class="b4">
-     &nbsp; <img src="https://yt3.googleusercontent.com/ytc/AGIKgqNY5NS50KiO5vw7KW5atwF2FSDtYYY5uiyBtdTRmQ=s176-c-k-c0x00ffffff-no-rj" alt="avatar" mat-card-avatar />
-      <a href="https://twitter.com/NatlParkService" style="color: black;"><h3><b>&nbsp; National Park Service</b></h3></a>
-      <span class="material-icons post__badge">verified</span>
-      <a href="https://twitter.com/NatlParkService" style="color: black;"><button><b>Follow</b></button></a>
-      
-    </div>
-    <div class="b5">
-      <p><a href="https://twitter.com/NatlParkService" style="color: black;">@NationalParkService</a></p>
-    </div>
-
-  
-
-    </div>
-    <div class="widgets__widgetContainer">
-      <div class="b6">
-<a href="https://www.invajy.com/short-quotes/"><img src="https://www.invajy.com/wp-content/uploads/2019/12/Short-Quotes.jpeg" alt=""></a>
-<a href="https://ideas.ted.com/how-do-animals-learn-how-to-be-well-animals-through-a-shared-culture/"><img src="https://ideas.ted.com/wp-content/uploads/sites/3/2020/05/final_animals-homeschooling_credit-alamy.jpg?resize=1000,600" alt=""></a>
-      </div>
-     
-      <div class="b7">
-      <a href="https://www.gardendesign.com/flowers/easy.html">  <img src="https://www.gardendesign.com/pictures/images/675x529Max/site_3/helianthus-yellow-flower-pixabay_11863.jpg" alt=""></a>
-       <a href="https://www.thespruce.com/the-difference-between-trees-and-shrubs-3269804"> <img src="https://www.thespruce.com/thmb/S15sM3N7Zir_xQBGa14Km6gJuCM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg" alt=""></a>
+<div class="login__header__right" >
+  <mat-card class="login__header__right__card">
+      <mat-card-content class="login__header__right__card__content">
+          <form [formGroup]="registerForm" class="login-form" (ngSubmit)="register()">
+            <input type="text" formControlName="name" placeholder="Name" required>
+              <div *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
+                <div *ngIf="registerForm.controls['name'].errors['required']" class="error-message error-required">name is required</div>
+              </div>
+              <input type="text" formControlName="email" placeholder="Email address or phone number" required>
+              <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                <div *ngIf="registerForm.controls['email'].errors['required']" class="error-message error-required">Email is required</div>
+                <div *ngIf="registerForm.controls['email'].errors['email']" class="error-message">Invalid email format</div>
               </div>
 
+              <input type="password" formControlName="password" placeholder="Password" required>
+              <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                <div *ngIf="registerForm.controls['password'].errors['required']" class="error-message error-required">Password is required</div>
+              </div>
+
+              <input type="password" formControlName="confirmpassword" placeholder="Confirm password" required>
+              <div *ngIf="registerForm.controls['confirmpassword'].invalid && (registerForm.controls['confirmpassword'].dirty || registerForm.controls['confirmpassword'].touched)">
+                <div *ngIf="registerForm.controls['confirmpassword'].errors['required']" class="error-message error-required">Confirm Password is required</div>
+              </div>
+               <div class="error-message" *ngIf="error">
+                    {{error}}
+                </div>
+
+              <button type="submit" class="login-button">Sign Up</button>
+            </form>
 
 
-    </div>
-    
-    
-    
-    
-  </div>
+
+
+       <br><a href="#" style="color: blue; margin-top: 290px;position: fixed;">Forgotten account?</a>
+          <hr>
+          <button class="create-account" (click)="openLogin()">Login</button>
+      </mat-card-content>
+  </mat-card>
+
+  <br><P class="tagline"><strong>Create a Page</strong>  for a celebrity, brand or business.</P>
+
 </div>
-<!-- widgets ends -->
 
-
+  </header>
 
 </div>
