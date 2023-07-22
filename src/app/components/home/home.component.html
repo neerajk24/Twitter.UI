@@ -62,7 +62,7 @@
 
  <!-- tweetbox starts -->
 <div class="tweetBox">
- 
+
     <div class="tweetBox__input">
       <img src="assets/profile.jpg" alt="avatar" mat-card-avatar  [src]="userProfilePhoto" />
       <input type="text"  [(ngModel)]="tweetMessage" placeholder="Whats happening?" />
@@ -76,14 +76,15 @@
         <span>Feeling/Activity</span>
         <button class="tweetBox__tweetButton"  (click)="postTweet()">Tweet</button>
     </div>
-  
-  
+
+
 </div>
 
  <!-- tweetbox ends -->
 
 
 <!-- post starts -->
+<div>
 <div class="b1">
 <div class="post__avatar">
   <img src="assets/profile.jpg" alt="avatar" mat-card-avatar />
@@ -115,10 +116,11 @@
 
   </div>
 </div>
+<hr>
+</div>
 </div>
 
-<hr>
-<div class="b1">
+<!-- <div class="b1">
   <div class="post__avatar">
     <img src="assets/profile.jpg" alt="avatar" mat-card-avatar />
   </div>
@@ -133,7 +135,7 @@
         </h3>
       </div>
       <div class="post__headerDescription">
-        <p>In order to conserve nature, we must take drastic steps right away to prevent any further damage. 
+        <p>In order to conserve nature, we must take drastic steps right away to prevent any further damage.
           <br>The most important step is to prevent deforestation at all levels.<a href="#">#savelife</a>  </p>
       </div>
     </div>
@@ -142,12 +144,12 @@
       <span class="material-icons">favorite_border</span>
       <span class="material-icons"> chat_bubble_outline </span>
       <span class="material-icons">repeat</span>
-  
+
       <span class="material-icons">publish</span>
-  
+
     </div>
   </div>
-  </div>
+  </div> -->
 
 <!-- here -->
 <hr>
@@ -159,29 +161,37 @@
       <div class="post__header">
         <div class="post__headerText">
           <h3>
-            <b>{{ tweet.username }}
+            <b>{{ username }}
               <span class="post__headerSpecial">
-                <span class="material-icons post__badge">verified</span>@{{ tweet.handle }}
+                <span class="material-icons post__badge">verified</span>@{{ username?.split(' ')[0].toLowerCase() }}
               </span>
             </b>
           </h3>
         </div>
         <div class="post__headerDescription">
-          <p>{{ tweet.message }}</p>
+          <p>{{ tweet.content }}</p>
         </div>
       </div>
-      <img src="{{ tweet.image }}" />
+      <img *ngIf="tweet.image" src="{{ tweet.image }}" />
       <div class="post__footer">
-        <span class="material-icons" (click)="likePost(tweet)">favorite_border</span>
+        <span class="material-icons" [ngStyle]="{color:tweet.likes>0?'red':'black'}" (click)="likePost(tweet)">favorite_border</span>
         <span class="like-count">{{ tweet.likes }}</span>
         <span class="material-icons" (click)="promptComment(tweet)"> chat_bubble_outline </span>
         <span class="comment-count">{{ tweet.comments.length }}</span>
-    
+
         <span class="material-icons">repeat</span>
         <span class="material-icons">publish</span>
-        
+
+        <div class="flex-basis-100" >
+          <h3 class="comment-alignment" (click)="toggleComment(tweet.content)">Comments <span *ngIf="!showComment " class="material-icons"> arrow_drop_down  </span><span *ngIf="showComment && showCommentid == tweet.content" class="material-icons"> arrow_drop_up  </span></h3>
+          <div *ngIf="showComment && showCommentid == tweet.content">
+            <ul>
+              <li *ngFor="let comment of tweet.comments">{{comment}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <hr>
+      <!-- <hr> -->
     </div>
   </div>
 
@@ -201,9 +211,9 @@
   <div class="widgets__input">
     <span class="material-icons widgets__searchIcon">search</span>
     <!-- <input type="text" placeholder="Search Twitter"> -->
-   
+
    <input type="text" placeholder="Search Twitter" (click)="showSearchHint = true" (blur)="showSearchHint = false" [(ngModel)]="searchQuery">
-   
+
   </div>
   <div class="search-hint-overlay" *ngIf="showSearchHint && !searchQuery">
     <div class="search-hint">
@@ -217,13 +227,13 @@
       <button><b>Get Verified</b></button>
     </div>
   </div>
-     
+
     <div class="widgets__widgetContainer">
-     
+
     <div class="b4">
      &nbsp;&nbsp;<h2><b>What's happening</b></h2><br>
     </div>
-    
+
     <div class="b7">
     &nbsp; Entertainment . trending <span class="material-icons" style="margin-left: 160px;">more_horiz</span>
     &nbsp;<a href="https://twitter.com/weirdlilguys" style="color: black;"><b>#Cats being weird little guys</b></a><br>
@@ -254,10 +264,10 @@
 <div class="b11">
   &nbsp; Trending in art <span class="material-icons" style="margin-left: 225px;">more_horiz</span>
  <br>&nbsp;<a href="https://twitter.com/WeirdMedieval" style="color: black;"><b>#weird medieval guys</b></a><br>
-  &nbsp;&nbsp; 2,655 Tweets 
+  &nbsp;&nbsp; 2,655 Tweets
 </div>
   </div>
-    
+
 <!-- widgets ends -->
 </div>
 
@@ -265,11 +275,11 @@
 
 
 
-      
-    
 
-   
-  
+
+
+
+
 
 
 

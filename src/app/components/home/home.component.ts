@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HomeService } from './home.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) {
-   console.log(window.sessionStorage);
+  constructor(private router: Router,public homeService:HomeService ) {
+  //  console.log(window.sessionStorage);
 
   }
 
@@ -21,35 +22,36 @@ export class HomeComponent implements OnInit {
   userProfilePhoto = 'assets/profile.jpg';
   tweetMessage = '';
   tweets: Tweet[] = [];
+  baseURL:string ;
+  userid:string ;
+  username:string = "Test User";
+  showComment= false;
+  showCommentid:string;
+
+
+
 
   ngOnInit(): void {
-    let userid = window.sessionStorage.getItem("id")
-    if(userid){
+    this.baseURL = window.sessionStorage.getItem('baseURL')
+    this.userid = window.sessionStorage.getItem("id")
+    if(this.userid){
       this.getFeeds()
+      // this.getUsername()
     }else{
       this.router.navigate(['/'])
     }
   }
 
   getFeeds(){
-    let userId = window.sessionStorage.getItem('id')
-    let token = window.sessionStorage.getItem('token')
-    const apiUrl = `https://localhost:44327/api/Feed/${userId}`;
-  // Set the headers (if required by your API)
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'accept': '*/*',
-    'Authorization' :`Bearer ${token}`
-  });
+    let userId = window.sessionStorage.getItem("id")
+    const apiUrl = `${this.baseURL}Feed/${userId}`;
 
   // Make the HTTP POST request
-  this.http.get(apiUrl, { headers: headers }).subscribe(
-    (response: any) => {
+  this.homeService.getRequest(apiUrl).subscribe(
+    (response:Tweet[]) => {
       console.log('Login successful!', response);
-      // set your feed to varible here
+      this.tweets = response;
 
-
-      this.router.navigate(['/home']);
     },
     (error: any) => {
       // Handle errors if the login fails
@@ -68,10 +70,8 @@ export class HomeComponent implements OnInit {
 
   postTweet() {
     if (this.tweetMessage) {
-      const newTweet: Tweet = {
-        username: 'Shweta Kale',
-        handle: 'shweta',
-        message: this.tweetMessage,
+      const newTweet: Tweet = {...new Tweet(),
+        content: this.tweetMessage,
         image: 'https://images.unsplash.com/your-image-url',
         likes: 0,
        comments: []
@@ -93,15 +93,58 @@ export class HomeComponent implements OnInit {
       tweet.comments.push(comment);
     }
   }
+
+  getUsername(){
+    let apiURL = `${window.sessionStorage.getItem('baseURL')}User/${this.userid}`
+    return this.homeService.getRequest(apiURL).subscribe((res:any)=>{
+      if(res){
+        this.username = res.name
+        console.log(this.username);
+      }
+    },
+    (error)=>{
+      console.log(error);
+
+    })
+  }
+
+  toggleComment(getid){
+    if(!this.showComment){
+      this.showComment = !this.showComment
+      this.showCommentid = getid;
+      return
+    }
+    if(this.showCommentid !=null && getid != null && this.showCommentid != getid){
+      this.showCommentid = getid
+      return
+    }
+
+    this.showComment = !this.showComment
+    this.showCommentid = getid;
+  }
 }
 
-interface Tweet {
-  username: string;
-  handle: string;
-  message: string;
-  image: string;
+// interface Tweet {
+//   username: string;
+//   handle: string;
+//   message: string;
+//   image: string;
+//   likes: number;
+//   comments: string[];
+// }
+
+class Tweet {
+  id: number;
+  content: string;
+  timestamp: string;
   likes: number;
-  comments: string[];
+  comments : string[];
+  video : string;
+  image:string;
+
 }
+
+
+
 
 
