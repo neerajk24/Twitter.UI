@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
- // constructor(){}
- ngOnInit(): void {
+  baseURL:string ;
+  ngOnInit(): void {
+   this.baseURL = window.sessionStorage.getItem('baseURL')
 
  }
 
@@ -44,7 +45,7 @@ register(): void {
   }
 
   // Your API URL for the register endpoint
-  const apiUrl = 'https://localhost:44327/api/User/signup';
+  const apiUrl = `${this.baseURL}User/signup`;
 
   // Create the request body
   const requestBody = {

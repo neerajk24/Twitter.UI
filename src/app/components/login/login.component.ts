@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit{
 
- // constructor(){}
- ngOnInit(): void {
+  baseURL:string ;
+  ngOnInit(): void {
+   this.baseURL = window.sessionStorage.getItem('baseURL')
 
  }
 
@@ -36,7 +37,7 @@ login(): void {
   const password = this.loginForm.value.password;
 
   // Your API URL for the login endpoint
-  const apiUrl = 'https://localhost:44327/api/User/login';
+  const apiUrl = `${this.baseURL}User/login`;
 
   // Create the request body
   const requestBody = {
