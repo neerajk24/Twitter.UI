@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.userid = window.sessionStorage.getItem("id")
     if(this.userid){
       this.getFeeds()
-      // this.getUsername()
+      this.getUsername()
     }else{
       this.router.navigate(['/'])
     }
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     let apiURL = `${window.sessionStorage.getItem('baseURL')}User/${this.userid}`
     return this.homeService.getRequest(apiURL).subscribe((res:any)=>{
       if(res){
-        this.username = res.name
+        this.username = res.Name
         console.log(this.username);
       }
     },
