@@ -21,7 +21,7 @@ export class HomeService {
   }
 
   postRequest(url,body){
-    return this.http.post(url,body,{ headers: this.getHeader() })
+    return this.http.post(url,body,{ headers: this.getHeader() }).subscribe();
   }
 
   getRequest(url){

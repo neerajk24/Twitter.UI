@@ -72,13 +72,21 @@ export class HomeComponent implements OnInit {
     if (this.tweetMessage) {
       const newTweet: Tweet = {...new Tweet(),
         content: this.tweetMessage,
-        image: 'https://images.unsplash.com/your-image-url',
+        //image: 'https://images.unsplash.com/your-image-url',
         likes: 0,
        comments: []
       };
 
       this.tweets.unshift(newTweet);
+      const requestBody = {
+        content : this.tweetMessage
+      };
       this.tweetMessage = '';
+      
+      // Call the API      
+      const apiUrl = `${this.baseURL}Feed/${this.userid}/tweets`;
+      this.homeService.postRequest(apiUrl,requestBody);
+
     }
   }
 
