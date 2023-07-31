@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { MaterialModule } from './shared/material/material.module';
 import{FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { HomeService } from './components/home/home.service';
 
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
     HomeComponent,
 
 
