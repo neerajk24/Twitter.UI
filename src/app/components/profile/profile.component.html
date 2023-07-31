@@ -1,55 +1,155 @@
-<div class="login-container">
-    <header class="login__header">
-  <div class="login__header__left">
-  <img src="assets/twitter-logo.png" alt="logo">
-  <h2>Twitter helps you connect and share your  <br>
-    thoughts with the people in your life.</h2>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<!-- sidebar starts -->
+<div class="box">
+<div class="sidebar">
+  <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/twitter.png" alt="logo" mat-card-avatar></b></h1>
+  <a routerLink="/home">
+  <div class="sidebarOption active">
+    <span class="material-icons">home</span>
+    <h2>Home</h2>
+   </div>
+  </a>
+   <a routerLink="/profile">
+   <div class="sidebarOption active">
+
+    <span class="material-icons">perm_identity</span>
+    <h2>Profile</h2>
+
+   </div>
+  </a>
+</div>
+
+<!-- sidebar ends -->
+
+
+<!-- feed starts -->
+<div class="feed">
+  <div class="feed__header">
+    <h2><b>Profile</b></h2>
   </div>
-  
+  <div class="profile_background"></div>
+
+  <div class="profile_card">
+    <!-- <br> -->
+    <div class="profile_img_container">
+      <img src="assets/profile.jpg" alt="John" class="profile_img">
+      <h1 >{{userData?.Name}}</h1>
+    </div>
+    <div class="profile_card_Deatils">
+      <label>Follower {{userData?.FollowersCount??0}} </label><label style="margin-left: 10%;"> Following {{userData?.Following?.length??0}}</label>
+    </div>
+  </div>
+
   <div class="login__header__right" >
     <mat-card class="login__header__right__card">
         <mat-card-content class="login__header__right__card__content">
-            <form [formGroup]="registerForm" class="login-form" (ngSubmit)="register()">
-              <input type="text" formControlName="name" placeholder="Name" required>
-                <div *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
-                  <div *ngIf="registerForm.controls['name'].errors['required']" class="error-message error-required">name is required</div>
-                </div>
-                <input type="text" formControlName="email" placeholder="Email address or phone number" required>
-                <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
-                  <div *ngIf="registerForm.controls['email'].errors['required']" class="error-message error-required">Email is required</div>
-                  <div *ngIf="registerForm.controls['email'].errors['email']" class="error-message">Invalid email format</div>
-                </div>
-  
-                <input type="password" formControlName="password" placeholder="Password" required>
-                <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
-                  <div *ngIf="registerForm.controls['password'].errors['required']" class="error-message error-required">Password is required</div>
-                </div>
-  
-                <input type="password" formControlName="confirmpassword" placeholder="Confirm password" required>
-                <div *ngIf="registerForm.controls['confirmpassword'].invalid && (registerForm.controls['confirmpassword'].dirty || registerForm.controls['confirmpassword'].touched)">
-                  <div *ngIf="registerForm.controls['confirmpassword'].errors['required']" class="error-message error-required">Confirm Password is required</div>
-                </div>
-                 <div class="error-message" *ngIf="error">
-                      {{error}}
-                  </div>
-  
-                <button type="submit" class="login-button">Sign Up</button>
-              </form>
-  
-  
-  
-  
-         <br><a href="#" style="color: blue; margin-top: 290px;position: fixed;">Forgotten account?</a>
-            <hr>
-            <button class="create-account" (click)="openLogin()">Login</button>
+          <form [formGroup]="registerForm" class="login-form" (ngSubmit)="updateUserdata()">
+            <span style="margin-left: auto;opacity: 50%;" (click)="updateEdit(true)" class="controls_container material-icons">edit</span>
+            <div class="controls_container">
+              <label class="form_label">Name</label>
+              <label *ngIf="!enableEdit" class="form_controls">{{userData?.Name}}</label>
+              <input *ngIf="enableEdit" class="form_controls" value={{userData?.Name}} type="text" formControlName="name" placeholder="Name" required>
+            </div>
+
+            <div class="controls_container">
+              <label class="form_label">Email</label>
+              <label class="form_controls">{{userData?.Email}}</label>
+            </div>
+
+            <div class="controls_container">
+              <label class="form_label">BIO</label>
+              <label *ngIf="!enableEdit" class="form_controls">{{userData?.Bio}}</label>
+              <input *ngIf="enableEdit" class="form_controls" value={{userData?.Bio}} type="textarea" formControlName="bio" placeholder="Bio" required>
+            </div>
+            <br>
+            <div class="error-message" *ngIf="error">
+              {{error}}
+            </div>
+            <div  *ngIf="enableEdit" class="buttons_css">
+              <button type="submit" class="login-button">Update</button>
+              <button type="button" (click)="updateEdit(false)" class="login-button login-button-class" >Cancle </button>
+            </div>
+            </form>
+         <br>
         </mat-card-content>
     </mat-card>
-  
-    <br><P class="tagline"><strong>Create a Page</strong>  for a celebrity, brand or business.</P>
-  
+
   </div>
-  
-    </header>
-  
+</div>
+
+
+<!-- Profile starts -->
+
+
+
+
+
+<!-- Profile ends -->
+
+
+
+
+
+
+<!-- widgets starts -->
+
+
+<div class="widgets">
+  <div class="widgets__input">
+    <span class="material-icons widgets__searchIcon">search</span>
+    <!-- <input type="text" placeholder="Search Twitter"> -->
+
+   <input type="text" placeholder="Search Twitter" (click)="showSearchHint = true" (blur)="showSearchHint = false" [(ngModel)]="searchQuery">
+
   </div>
-  
+  <div class="search-hint-overlay" *ngIf="showSearchHint && !searchQuery">
+    <div class="search-hint">
+      Try searching for people, topics, or keywords
+    </div>
+  </div>
+  <div class="widgets__widgetContainer">
+    <div class="b3">
+      <h2><b>Get Verified</b></h2>
+     <p><b>&nbsp;&nbsp;&nbsp;Subscribe to unlock new features</b></p>
+      <button><b>Get Verified</b></button>
+    </div>
+  </div>
+
+    <div class="widgets__widgetContainer">
+
+    <div class="b4">
+     &nbsp;&nbsp;<h2><b>What's happening</b></h2><br>
+    </div>
+
+<div class="b8">
+  &nbsp; Trending in india <span class="material-icons" style="margin-left: 210px;">more_horiz</span>
+ <br>&nbsp;<a href="https://twitter.com/narendramodi" style="color: black;"><b>#Narendra Modi</b></a><br>
+  &nbsp;&nbsp; 37K Tweets
+</div>
+<br>
+
+<div class="b9">
+  &nbsp; Politics in india <span class="material-icons" style="margin-left: 220px;">more_horiz</span>
+ <br>&nbsp;<a href="https://twitter.com/INCIndia" style="color: black;"><b>#Congress</b></a><br>
+  &nbsp;&nbsp; 130K Tweets
+</div>
+
+<br>
+<div class="b10">
+  &nbsp;  Sports . trending  <span class="material-icons" style="margin-left: 210px;">more_horiz</span>
+ <br>&nbsp;<a href="https://twitter.com/FabrizioRomano" style="color: black;"><b>#Fabrizio Romano</b></a><br>
+  &nbsp;&nbsp; 27.8K Tweets
+</div>
+<br>
+
+<div class="b11">
+  &nbsp; Trending in art <span class="material-icons" style="margin-left: 225px;">more_horiz</span>
+ <br>&nbsp;<a href="https://twitter.com/WeirdMedieval" style="color: black;"><b>#weird medieval guys</b></a><br>
+  &nbsp;&nbsp; 2,655 Tweets
+</div>
+  </div>
+
+<!-- widgets ends -->
+</div>

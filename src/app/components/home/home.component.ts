@@ -82,8 +82,8 @@ export class HomeComponent implements OnInit {
         content : this.tweetMessage
       };
       this.tweetMessage = '';
-      
-      // Call the API      
+
+      // Call the API
       const apiUrl = `${this.baseURL}Feed/${this.userid}/tweets`;
       this.homeService.postRequest(apiUrl,requestBody);
 
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUsername(){
-    let apiURL = `${window.sessionStorage.getItem('baseURL')}User/${this.userid}`
+    let apiURL = `${this.baseURL}User/${this.userid}`
     return this.homeService.getRequest(apiURL).subscribe((res:any)=>{
       if(res){
         this.username = res.Name
